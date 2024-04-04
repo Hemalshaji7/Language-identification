@@ -1,9 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
+import sklearn as sk
 
 # Set UTF-8 encoding
 import os
@@ -27,12 +25,12 @@ st.write(data["language"].value_counts())
 # Train the machine learning model
 x = data["Text"]
 y = data["language"]
-cv = CountVectorizer()
+cv = sk.CountVectorizer()
 X = cv.fit_transform(x)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+X_train, X_test, y_train, y_test = sk.train_test_split(X, y, test_size=0.33, random_state=42)
 
 # Train the Multinomial Naive Bayes model
-model = MultinomialNB()
+model = sk.MultinomialNB()
 model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
 st.write("Model accuracy:", score)
