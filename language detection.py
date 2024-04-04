@@ -1,33 +1,47 @@
-#importing python libraries
-import pandas as pd 
-import os
-os.environ["PYTHONIOENCODING"] = "utf-8"
-import numpy as np 
+import streamlit as st
+import pandas as pd
+import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 
+# Set UTF-8 encoding
+import os
+os.environ["PYTHONIOENCODING"] = "utf-8"
 
-#extrating the data
+# Load the data
 data = pd.read_csv("https://raw.githubusercontent.com/amankharwal/Website-data/master/dataset.csv")
-data.head(10).to_csv('output.txt', sep='\t', index=False)
-print(data.isnull().sum())
-data["language"].value_counts()
 
-#trainig the machine language model using multinomial naiive Bayes
-x=np.array(data["Text"])
-y=np.array(data["language"])
-cv=CountVectorizer()
-X=cv.fit_transform(x)
-X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.33,random_state=42)
+# Display the first 10 rows of the data
+st.write("First 10 rows of the dataset:")
+st.write(data.head(10))
 
-#algorithm based on multinomial naiive Bayes to train language detection model
-model=MultinomialNB()
-model.fit(X_train,y_train)
-model.score(X_test,y_test)
+# Check for missing values
+st.write("Number of missing values:")
+st.write(data.isnull().sum())
 
-#'taking the user input'
-user=input("eneter a text: ")
-data=cv.transform([user]).toarray()
-output=model.predict(data)
-print(output)
+# Count the occurrences of each language
+st.write("Language distribution:")
+st.write(data["language"].value_counts())
+
+# Train the machine learning model
+x = data["Text"]
+y = data["language"]
+cv = CountVectorizer()
+X = cv.fit_transform(x)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+
+# Train the Multinomial Naive Bayes model
+model = MultinomialNB()
+model.fit(X_train, y_train)
+score = model.score(X_test, y_test)
+st.write("Model accuracy:", score)
+
+# User input
+user_input = st.text_input("Enter a text:")
+
+# Make predictions based on user input
+if user_input:
+    data = cv.transform([user_input]).toarray()
+    output = model.predict(data)
+    st.write("Predicted language:", output[0])
