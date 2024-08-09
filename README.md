@@ -1,4 +1,4 @@
-# Language Identification
+# Language-Identification
 
 ## Overview
 This project focuses on detecting the language of given text inputs. The provided Python script leverages natural language processing techniques to classify text into different languages. This is essential for applications in multilingual communication, automatic translation, and text analytics.
