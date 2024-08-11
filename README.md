@@ -25,6 +25,10 @@ Language detection is crucial in the era of global communication and data analys
 - **Text Analytics**: Enhancing text analysis by understanding the language context of the data.
 
 This script provides a foundational approach to implementing language detection in Python, leveraging machine learning techniques for accurate and efficient classification.
+## Demo
+Here’s a screenshot of the language detection results:
+
+![Language Detection Demo](images/result_demo.png)
 
 ## How to Use
 1. **Install Dependencies**: Ensure all required Python libraries are installed.
