@@ -28,7 +28,7 @@ This script provides a foundational approach to implementing language detection 
 ## Demo
 Here’s a screenshot of the language detection results:
 
-![Language Detection Demo](language_detection.png)
+![Language Detection Demo](https://github.com/Hemalshaji7/Language-identification/blob/main/language_detection%20.png)
 
 ## How to Use
 1. **Install Dependencies**: Ensure all required Python libraries are installed.
